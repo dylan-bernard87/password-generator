@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.custom-checkbox {
+    appearance: none;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 0.2rem;
+    cursor: pointer;
+}
