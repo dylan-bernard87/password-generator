@@ -19,6 +19,7 @@ export default {
 		}
 	},
 	methods: {
+
 		generate() {
 			let newPassword = '';
 			let chars = this.determineChars();
@@ -27,6 +28,7 @@ export default {
 			}
 			this.password = newPassword;
 		},
+
 		determineChars() {
 			let chars = this.CHAR;
 			if (this.caps) chars += this.CHAR.toUpperCase();
@@ -34,11 +36,23 @@ export default {
 			if (this.number) chars += this.NUMBER;
 			return chars;
 		},
-		copyPassword()	{
 
+		copyPassword()	{
+			navigator.clipboard.writeText(this.password);
 		},
+
 		updateBooleanField(field) {
 			this[field] = !this[field];
+		},
+
+		passwordIsEmpty() {
+			console.log("passwordIsEmpty")
+
+			if (this.password == '') {
+				return true;
+			}
+
+			return false;
 		}
 	}
 }
@@ -50,14 +64,20 @@ export default {
 
 			<h1 class="text-center text-xl uppercase font-bold py-2">Password Generator</h1>
 
-			<div class="px-2 pt-2">
+			<div class="px-2 pt-2 flex">
 				<input
-					class="w-full text-primary border border-primary rounded p-2"
+					class="w-full text-primary border border-primary rounded-l p-2"
 					type="text"
 					disabled
 					:value="password"
 					placeholder="Generate password"
 				>
+				<button
+					@click="copyPassword"
+					class="bg-primary text-white rounded-r hover:opacity-75 duration-100 ease-in cursor-pointer px-2"
+					v-show="password != ''">
+						<i class="fa-solid fa-clone"></i>
+					</button>
 			</div>
 
 			<div class="px-2 pt-4">
